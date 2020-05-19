@@ -21,8 +21,8 @@ def read_data(request_id):
 		'lon':37.528283,
 		'info':'info',
 		'color':'gray',
-		'fill_color','purple',
-		'fill_opacity',0.9
+		'fill_color':'purple',
+		'fill_opacity':0.9
 		}
 	data.append(record)
 	return data
