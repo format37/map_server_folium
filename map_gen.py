@@ -13,7 +13,7 @@ def read_data(request_id):
 	cursor = conn.cursor()
 	query ="show tables;"
 	cursor.execute(query)
-	data[]
+	data = []
 	for row in cursor.fetchall():
 		id	= row[0]
 	record	= {
