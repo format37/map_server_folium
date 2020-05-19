@@ -11,11 +11,11 @@ def connect_sql(database):
 def read_data(request_id):
 	conn = connect_sql('geo_map')
 	cursor = conn.cursor()
-	query ="show tables;"
+	query ="SELECT [request_id],[lat],[lon],[info],[color],[fill_color],[fill_opacity] FROM [geo_map].[dbo].[requests];"
 	cursor.execute(query)
 	data = []
 	for row in cursor.fetchall():
-		id	= row[0]
+		lat	= row[0]
 	record	= {
 		'lat':55.900803,
 		'lon':37.528283,
