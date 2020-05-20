@@ -22,7 +22,7 @@ async def generate_map(request):
 	lon	= request.rel_url.query['lon']
 	zoom	= request.rel_url.query['zoom']
 	show	= request.rel_url.query['show']
-	print("map_generator",request_id,lat,lon,zoom)
+	#print("map_generator",request_id,lat,lon,zoom)
 	content = map_generator(request_id,lat,lon,zoom,show)
 	return web.Response(text=content,content_type="text/html")
 

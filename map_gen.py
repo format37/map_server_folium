@@ -28,7 +28,7 @@ def read_data(request_id):
 	query ="delete from geo_map.dbo.requests where request_id='"+request_id+"';"
 	cursor.execute(query)
 	conn.commit()
-	print("data",len(data))
+	#print("data",len(data))
 	return data	
 	
 def map_generator(request_id,lat,lon,zoom,show):
