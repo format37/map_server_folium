@@ -47,8 +47,8 @@ def map_generator(request_id,lat,lon,zoom):
 		).add_to(marker_cluster)
 
 	query ="delete from geo_map.dbo.requests where request_id='"+request_id+"';"
-			cursor.execute(query)
-			conn.commit()
+	cursor.execute(query)
+	conn.commit()
 		
 	map.save("maps/"+request_id+".html")	
 	with open("maps/"+request_id+".html","r") as file:
