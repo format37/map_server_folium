@@ -10,21 +10,20 @@ def connect_sql(database):
 
 def read_data(request_id):
 	conn = connect_sql('geo_map')
-	cursor = conn.cursor()
-	query ="SELECT [request_id],[lat],[lon],[info],[color],[fill_color],[fill_opacity] FROM [geo_map].[dbo].[requests];"
+	cursor = conn.cursor()	
+	query = "SELECT lat,lon,info,color,fill_color,fill_opacity FROM geo_map.dbo.requests where request_id='"+request_id+"';"
 	cursor.execute(query)
 	data = []
 	for row in cursor.fetchall():
-		lat	= row[0]
-	record	= {
-		'lat':55.900803,
-		'lon':37.528283,
-		'info':'info',
-		'color':'gray',
-		'fill_color':'purple',
-		'fill_opacity':0.9
-		}
-	data.append(record)
+		record	= {
+			'lat':row[0],
+			'lon':row[1],
+			'info':row[2],
+			'color':row[3],
+			'fill_color':row[4],
+			'fill_opacity':row[5]
+			}
+		data.append(record)
 	return data
 	
 	
@@ -44,8 +43,6 @@ def map_generator(request_id):
 			color=record['color'], 
 			fill_opacity = record['fill_opacity']
 		).add_to(marker_cluster)
-	#folium.CircleMarker(location=[55.900803, 37.528283], radius = 9, popup="info purple", fill_color="purple", color="gray", fill_opacity = 0.9).add_to(marker_cluster)
-	#folium.CircleMarker(location=[55.611109, 37.603445], radius = 9, popup="info green", fill_color="green", color="gray", fill_opacity = 0.9).add_to(marker_cluster)
 
 	map.save("maps/"+request_id+".html")	
 	with open("maps/"+request_id+".html","r") as file:
