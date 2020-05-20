@@ -48,11 +48,11 @@ def map_generator(request_id,lat,lon,zoom,show):
 			fill_opacity = record['fill_opacity']
 		).add_to(marker_cluster)
 	
-	map.save("maps/"+request_id+".html")
+	map.save("/home/alex/projects/map_server_folium/maps/"+request_id+".html")
 	
 	answer = 'ok'
 	if show=='1':
-		with open("maps/"+request_id+".html","r") as file:
+		with open("/home/alex/projects/map_server_folium/maps/"+request_id+".html","r") as file:
 			answer = file.read()
 	
 	return answer

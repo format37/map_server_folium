@@ -10,8 +10,8 @@ from map_gen import map_generator
 
 async def load_map(request):
 	request_id	= request.rel_url.query['request_id']
-	content = "map not found"
-	with open("maps/"+request_id+".html","r") as file:
+	content = "map not found"	
+	with open("/home/alex/projects/map_server_folium/maps/"+request_id+".html","r") as file:
 		content = file.read()
 	return web.Response(text=content,content_type="text/html")
 	
