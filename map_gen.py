@@ -27,9 +27,11 @@ def read_data(request_id):
 	return data
 	
 	
-def map_generator(request_id):
-	start_point = [55.753766,37.621384]
-	zoom_start	= 10
+def map_generator(request_id,lat,lon,zoom):
+	#start_point = [55.753766,37.621384]
+	start_point = [lat,lon]
+	#zoom_start	= 10
+	zoom_start	= zoom
 	map = folium.Map(location=start_point, zoom_start = zoom_start)
 	marker_cluster = MarkerCluster().add_to(map)
 	data = read_data(request_id)
@@ -44,6 +46,10 @@ def map_generator(request_id):
 			fill_opacity = record['fill_opacity']
 		).add_to(marker_cluster)
 
+	query ="delete from geo_map.dbo.requests where request_id='"+request_id+"';"
+			cursor.execute(query)
+			conn.commit()
+		
 	map.save("maps/"+request_id+".html")	
 	with open("maps/"+request_id+".html","r") as file:
 		return file.read()

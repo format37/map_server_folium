@@ -10,9 +10,12 @@ from map_gen import map_generator
 
 async def show_map(request):
 	request_id	= request.rel_url.query['request_id']
-	content = map_generator(request_id)
+	lat	= request.rel_url.query['lat']
+	lon	= request.rel_url.query['lon']
+	zoom	= request.rel_url.query['zoom']
+	content = map_generator(request_id,lat,lon,zoom)
 	return web.Response(text=content,content_type="text/html")
-	
+
 app = web.Application()
 app.router.add_route('GET', '/map', show_map)
 
