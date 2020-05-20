@@ -8,17 +8,27 @@ import multidict as MultiDict
 import requests
 from map_gen import map_generator
 
-async def show_map(request):
+async def load_map(request):
+	request_id	= request.rel_url.query['request_id']
+	content = "map not found"
+	with open("maps/"+request_id+".html","r") as file:
+		content = file.read()
+	return web.Response(text=content,content_type="text/html")
+	
+
+async def generate_map(request):
 	request_id	= request.rel_url.query['request_id']
 	lat	= request.rel_url.query['lat']
 	lon	= request.rel_url.query['lon']
 	zoom	= request.rel_url.query['zoom']
+	show	= request.rel_url.query['show']
 	print("map_generator",request_id,lat,lon,zoom)
-	content = map_generator(request_id,lat,lon,zoom)
+	content = map_generator(request_id,lat,lon,zoom,show)
 	return web.Response(text=content,content_type="text/html")
 
 app = web.Application()
-app.router.add_route('GET', '/map', show_map)
+app.router.add_route('GET', '/map', generate_map)
+app.router.add_route('GET', '/load', load_map)
 
 loop = asyncio.get_event_loop()
 handler = app.make_handler()
