@@ -46,12 +46,12 @@ def map_generator(request_id,lat,lon,zoom):
 			fill_opacity = record['fill_opacity']
 		).add_to(marker_cluster)
 		
-	conn = connect_sql('geo_map')
+	'''conn = connect_sql('geo_map')
 	cursor = conn.cursor()
 	query ="delete from geo_map.dbo.requests where request_id='"+request_id+"';"
 	cursor.execute(query)
 	conn.commit()
-	conn.close()
+	conn.close()'''
 		
 	map.save("maps/"+request_id+".html")	
 	with open("maps/"+request_id+".html","r") as file:
