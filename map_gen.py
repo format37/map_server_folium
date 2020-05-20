@@ -25,6 +25,9 @@ def read_data(request_id):
 			}
 		data.append(record)
 	#conn.close()
+	query ="delete from geo_map.dbo.requests where request_id='"+request_id+"';"
+	cursor.execute(query)
+	conn.commit()
 	print("data",len(data))
 	return data
 	
