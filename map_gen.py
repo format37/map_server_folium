@@ -24,7 +24,7 @@ def read_data(request_id):
 			'fill_opacity':row[5]
 			}
 		data.append(record)
-	conn.close()
+	#conn.close()
 	
 	return data
 	
