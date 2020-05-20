@@ -25,7 +25,7 @@ def read_data(request_id):
 			}
 		data.append(record)
 	#conn.close()
-	
+	print("data",len(data))
 	return data
 	
 	
@@ -52,7 +52,8 @@ def map_generator(request_id,lat,lon,zoom):
 	cursor.execute(query)
 	conn.commit()
 	conn.close()'''
-		
-	map.save("maps/"+request_id+".html")	
+	
+	map.save("maps/"+request_id+".html")
+	print("saved")
 	with open("maps/"+request_id+".html","r") as file:
 		return file.read()

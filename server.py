@@ -13,6 +13,7 @@ async def show_map(request):
 	lat	= request.rel_url.query['lat']
 	lon	= request.rel_url.query['lon']
 	zoom	= request.rel_url.query['zoom']
+	print("map_generator",request_id,lat,lon,zoom)
 	content = map_generator(request_id,lat,lon,zoom)
 	return web.Response(text=content,content_type="text/html")
 
