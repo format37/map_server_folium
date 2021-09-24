@@ -4,6 +4,7 @@ import os
 import folium
 from folium.plugins import MarkerCluster
 import pandas as pd
+from io import StringIO
 
 async def call_test(request):
 	content = "get ok"
