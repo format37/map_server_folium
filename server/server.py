@@ -4,15 +4,16 @@ import json
 import folium
 from folium.plugins import MarkerCluster
 
-async def call_test(request):	
+async def call_test(request):
 	content = "get ok"
 	return web.Response(text=content,content_type="text/html")
 
 async def call_map(request):
 	
 	request_str = json.loads(str(await request.text()))
-	request = json.loads(request_str)	
-	response = 'post ok'
+	request = json.loads(request_str)
+	print(request)
+	response = 'post ok\n'+str(request)
 	return web.Response(text=str(response),content_type="text/html")
 
 app = web.Application(client_max_size=1024**3)
