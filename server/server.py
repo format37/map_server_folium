@@ -10,7 +10,7 @@ async def call_test(request):
 
 async def call_map(request):
 	
-	request_str = json.loads(str(await request.text()))
+	request_str = json.loads(str(await request.text()).replace('\ufeff', ''))
 	request = json.loads(request_str)
 	print(request)
 	response = 'post ok\n'+str(request)
