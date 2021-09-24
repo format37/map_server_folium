@@ -1,8 +1,9 @@
 from aiohttp import web
 import os
-import json
+#import json
 import folium
 from folium.plugins import MarkerCluster
+import pandas as pd
 
 async def call_test(request):
 	content = "get ok"
@@ -10,12 +11,14 @@ async def call_test(request):
 
 async def call_map(request):
 	
-	request_str = str(await request.text()).replace('\ufeff', '')
-	print(request_str)
-	request_str = json.loads(request_str)
-	request = json.loads(request_str)
-	print(request)
-	response = 'post ok\n'+str(request)
+	csv_text = str(await request.text()).replace('\ufeff', '')
+	#print(csv_text)
+	df = pd.read_csv(StringIO(csv_text), sep=';')
+	print(df)
+	#request_str = json.loads(request_str)
+	#request = json.loads(request_str)
+	#print(request)
+	response = 'post ok\n'+str(df)
 	return web.Response(text=str(response),content_type="text/html")
 
 app = web.Application(client_max_size=1024**3)
